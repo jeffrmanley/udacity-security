@@ -1,0 +1,16 @@
+
+# What additional architectural change can be made to reduce the internet facing attack surface of the web application instance.
+
+1. disable SSH root account logins, set PermitRootLogin to 'no' in /etc/ssh/sshd_config and restart sshd
+2. process 'systemd-netwo' is listening on UDP port 68 which is associated with 'DHCP' and is reachable from the internet :: You can edit the Security Group sg-073e89e265dabfeb9 to remove access from the internet on port 68
+
+
+# Assuming the IAM permissions for the S3 bucket are still insecure, would creating VPC private endpoints for S3 prevent the unauthorized access to the secrets bucket.
+Yes, you can create the VPC endpoints and only allow access from the VPC endpoints
+
+
+# Will applying default encryption setting to the s3 buckets encrypt the data that already exists?
+No, but can encrypt your existing Amazon S3 objects with a single request, you can use Amazon S3 batch operations. You provide S3 Batch Operations with a list of objects to operate on, and Batch Operations calls the respective API to perform the specified operation. You can use the copy operation to copy the existing unencrypted objects and write the new encrypted objects to the same bucket. A single Batch Operations job can perform the specified operation on billions of objects containing exabytes of data.
+
+# What would happen if the original cloud formation templates are applied to this environment.
+The security changes applied in this section would be undone

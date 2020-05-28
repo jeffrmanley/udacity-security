@@ -1,0 +1,9 @@
+Based on the architecture diagram, and the steps you have taken so far to upload data and access the application web service, identify at least 2 obvious poor practices as it relates to security.  Include justification.
+
+# Poor practice 1
+The application server is in the public subnet - the application server should not be publicly available. It currently allows being easily attacked; it should only be available to the to the load balancer via a private subnet
+
+# Poor practice 2
+The S3 bucket should not be publicly accessible. There should be a role based access created between the app server and the bucket
+
+

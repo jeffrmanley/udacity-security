@@ -1,0 +1,20 @@
+# Identify tools that will allow you to do the following:
+
+## Scan infrastructure as code templates
+CloudSploit
+
+### Example vulnerability
+The default security group is often used for resources launched without a defined security group. For this reason, the default rules should be to block all traffic to prevent an accidental exposure.
+
+
+##Scan AMI’s or containers for OS vulnerabilities
+Anchore
+
+### Example vulnerability
+can check an image/container to see if it has any known CVE vulnerabilities
+
+##Scan an AWS environment for cloud configuration vulnerabilities
+ScoutSuite
+
+### Example vulnerability
+Compute and Database external attack surface

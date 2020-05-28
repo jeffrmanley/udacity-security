@@ -1,0 +1,13 @@
+Research and analyze which of the vulnerabilities appear to be related to the code that was deployed for the environment in this project.
+
+1. CIS 4.1 Ensure no security groups allow ingress from 0.0.0.0/0 to port 22 :: resolve by modifying the security group and only allowing access from my IP address
+2. c1-web-service-alb HTTP listener rule must have HTTP to HTTPS redirection action configured :: install a SSL certificate and turn on HTTPS redirection
+3. S3 logs are not enabled for all the buckets created today :: enable S3 logs for all buckets
+4. VPC - Checks whether default security group for VPC is closed :: remove the default security groups
+5. No password complexity mechanism or restrictions are configured on instance i-0e00204885a52cbac in your assessment target. This allows users to set simple passwords, thereby increasing the chances of unauthorized users gaining access and misusing accounts. :: it is recommended that you configure all EC2 instances in your assessment target to require a level of password complexity. You can do this by using **pam_cracklib.so** "lcredit", "ucredit", "dcredit", and "ocredit" settings.
+6.  Instance i-0e00204885a52cbac is configured to support password authentication over SSH. Password authentication is susceptible to brute-force attacks and should be disabled in favor of key-based authentication where possible. :: disable password authentication over SSH 
+7.  Minimum length for passwords is not configured on instance i-0e00204885a52cbac in your assessment target. :: To enforce minimum password lengths, set the “minlen” parameter of **pam_cracklib.so** in your PAM configuration.
+8. Instance i-0e00204885a52cbac is configured to allow users to log in with root credentials over SSH, without having to use a command authenticated by a public key. This increases the likelihood of a successful brute-force attack. :: To disable SSH root account logins, set PermitRootLogin to 'no' in /etc/ssh/sshd_config and restart sshd
+9. On instance i-0e00204885a52cbac, process 'systemd-netwo' is listening on UDP port 68 which is associated with 'DHCP' and is reachable from the internet :: You can edit the Security Group sg-073e89e265dabfeb9 to remove access from the internet on port 68
+
+Bonus - provide recommendations on how to remediate the vulnerabilities. (remediations are above after ::)
