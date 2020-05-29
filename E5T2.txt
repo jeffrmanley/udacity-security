@@ -1,20 +1,66 @@
 # Identify tools that will allow you to do the following:
 
 ## Scan infrastructure as code templates
-CloudSploit
+CloudSploit, CFripper, Cloud Conformity
 
 ### Example vulnerability
-The default security group is often used for resources launched without a defined security group. For this reason, the default rules should be to block all traffic to prevent an accidental exposure.
-
+- The default security group is often used for resources launched without a defined security group. For this reason, the default rules should be to block all traffic to prevent an accidental exposure.
+- security groups set to "0.0.0.0/0
+- KMS keys that don't have rotation enabled
+- ELBs with invalid SSL configurations
+- Misconfigurations in EC2, RDS, IAM, ElasticSearch, VPC, Redshift, SNS, and numerous other services.
+- Compliance Standards including HIPAA, GDPR, CIS, NIST, PCI-DSS, APRA, and MAS
 
 ##Scan AMI’s or containers for OS vulnerabilities
-Anchore
+Anchore, trivy, snyk
 
 ### Example vulnerability
-can check an image/container to see if it has any known CVE vulnerabilities
+- can check an image/container to see if it has any known CVE vulnerabilities (i.e. Remote Code Execution, Information Exposure, Privilege Excalation, Cross-site Scripting)
+- searches for secrets that may be contained with an image via a regex check (filename or content) i.e. AWS_ACCESS_KEY, AWS_SECRET_KEY, API_KEY
+- Checking the USER instruction and making sure the effective user is not root
+- Check for the existance of the HEALTHCHECK instruction is present within a Dockerfile
+- Checks for an update instruction alone or in a single line (having this could deny a fresh update when it is built again)
+- Only allow setuid and set gid permissions on executables 
+- Check for the use of COPY instead of ADD instruction
+- Verify the authenticity of packages before installing them in the image
+- check for exposed port 22
+
+
 
 ##Scan an AWS environment for cloud configuration vulnerabilities
-ScoutSuite
+ScoutSuite, Prowler, CloudSploit, Zeus, Security Monkey
 
 ### Example vulnerability
 Compute and Database external attack surface
+GDPR Checks: 
+Data Access Controls
+-Fine granular access to AWS object in S3-Buckets: extra718 and extra725
+-Fine granular access to SQS: extra727
+-Fine granular access to SNS: extra731
+-Multi-Factor-Authentication (MFA): check12, check113, check114, extra71
+-API-Request Authentication: this is about AWS API, entire IAM group1 may apply
+-Geo-Restrictions (CloudFront): extra732
+-Temporary access tokens through STS: extra733, probably a query to see if identity federation is configured?
+
+Monitoring and Logging
+-Asset-Management and Configuration with AWS Config: check25, check39,
+-Compliance Auditing and security analytics with AWS CloudTrail: check21, check22, check23, check24, check26,check27,check35
+-Identifications of configuration challenges through TrustedAdvisor extra726 show TA errors and warnings.
+-Server access logs: this should be instances log? we can add service logs like extra714,extra715,extra717,extra719,extra720,extra721,extra722
+-VPC-FlowLogs: check43
+-AWS Config Rules: check25 already
+-Filter and monitoring of HTTP access to applications with WAF functions in CloudFront: extra714 already
+
+Protecting your Data on AWS
+-Encryption of your data at rest with AES256 EBS extra729
+-Encryption of your data at rest with AES256 S3 extra734
+-Encryption of your data at rest with AES256 RDS extra735
+-Centralized (by Region) managed Key-Management extra736
+-IPsec tunnels into AWS with the VPN-Gateways. This is a security best practice, not an actual check.
+-Dedicated HSM modules in the cloud with CloudHSM. This one may depend on each case, not an actual check
+
+HIPPA Checks:
+results of controls related to the "Security Rule" of the Health Insurance Portability and Accountability Act aka HIPAA as defined in 45 CFR Subpart C - Security Standards for the Protection of Electronic Protected Health Information
+
+Trust Boundaries Checks
+

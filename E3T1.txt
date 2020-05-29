@@ -6,4 +6,11 @@ This finding informs you that an EC2 instance in your AWS environment was involv
 
 # Research the AWS Guard Duty documentation page and explain how GuardDuty may have detected this attack - i.e. what was its source of information.
 
-GuardDuty detected this since it monitors traffic on port 22.
+One source GuardDuty consumes and analyzes is the VPC Flow Log. This log capture information about the IP traffic going in and out of the Amazon EC2 network interfaces in the VPC. GuardDuty detected an anomaly in the VPC Flow Log related to the server on port 22. A failed log in attempt multiple times from the same IP address. GuardDuty uses thread intelligence provided by AWS Security and third-party providers like Proofpoint and CrowdStrike. There are times when this might be a false positive if you use a bastion host; in that case you'd need to setup a suppression rule for the finding.
+
+
+
+
+
+
+
